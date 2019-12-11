@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HotelDetailsActivity">
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/hotel_details_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintVertical_bias="0.01"
+        app:layout_constraintBottom_toTopOf="@id/hotel_details_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/hotel_details_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hotel name"
+        android:textSize="24sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toTopOf="@id/prices_layout"
+        app:layout_constraintTop_toBottomOf="@id/hotel_details_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/prices_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/hotel_address"
+        app:layout_constraintTop_toBottomOf="@id/hotel_details_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hotel_lowRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="actual rate"
+                android:textSize="24sp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/hotel_lowRate_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="521"
+                android:textSize="24sp"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hotel_highRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="normal price"
+                android:textSize="24sp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/hotel_highRate_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="59223.65"
+                android:textSize="24sp"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hotel_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hotel address"
+        android:textSize="24sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/prices_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
