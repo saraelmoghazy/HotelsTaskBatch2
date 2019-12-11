@@ -23,6 +23,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 public class MainActivity extends AppCompatActivity implements OnHotelListener {
 
@@ -38,28 +39,28 @@ public class MainActivity extends AppCompatActivity implements OnHotelListener {
     private HotelRecyclerAdapter mAdapter;
     private List<HotelItem> mHotelList;
 
+    // constants
+    private static final int NUM_COLUMNS = 2; // number of columns for staggeredGridLayout
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mHotelList = new ArrayList<>();
-
         mHotelViewModel = ViewModelProviders.of(this).get(HotelViewModel.class);
-
         mRecyclerView = findViewById(R.id.hotels_recyclerView);
-
         mProgressBar = findViewById(R.id.progressbar);
-
         mConstraintLayout = findViewById(R.id.constraint_layout);
-
-        getHotel();
+        observeHotels();
     }
 
     // initialize recycler view with adapter
     public void initRecycler() {
         mAdapter = new HotelRecyclerAdapter(this, this, mHotelList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        StaggeredGridLayoutManager staggeredGridLayoutManager =
+                new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -71,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements OnHotelListener {
         }
     }
 
-    public void getHotel() {
-        mHotelViewModel.getHotel().removeObservers(this);
-        mHotelViewModel.getHotel().observe(this, new Observer<Resource<Hotel>>() {
+    public void observeHotels() {
+       // mHotelViewModel.getHotel().removeObservers(this);
+        mHotelViewModel.getHotelLiveData().observe(this, new Observer<Resource<Hotel>>() {
             @Override
             public void onChanged(Resource<Hotel> hotelResource) {
 
@@ -82,13 +83,13 @@ public class MainActivity extends AppCompatActivity implements OnHotelListener {
                     switch (hotelResource.status) {
 
                         case LOADING: {
-                            Log.d(TAG, "onChanged: LOADING: SHOW PROGRESS BAR");
-                            showProgressbar(true);
+                            if (hotelResource.isLoading)
+                                showProgressbar(true);
+                            else showProgressbar(false);
                             break;
                         }
 
                         case SUCCESS: {
-                            showProgressbar(false);
                             Log.d(TAG, "onChanged: SUCCESS: " + hotelResource.data.getHotel().toString());
                             mHotelList.addAll(hotelResource.data.getHotel());
                             initRecycler();
@@ -96,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements OnHotelListener {
                         }
 
                         case ERROR: {
-                            showProgressbar(false);
                             Log.d(TAG, "onChanged: ERROR " + hotelResource.message);
                             Snackbar.make(mConstraintLayout, "There is no internet connection", Snackbar.LENGTH_LONG)
                                     .show();

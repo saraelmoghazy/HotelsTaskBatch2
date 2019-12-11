@@ -19,22 +19,25 @@ public class Resource<T> {
     @Nullable
     public final String message;
 
-    public Resource(@NonNull Status status, @Nullable T data, @Nullable String message) {
+    public final boolean isLoading;
+
+    public Resource(@NonNull Status status, @Nullable T data, @Nullable String message, boolean isLoading) {
         this.status = status;
         this.data = data;
         this.message = message;
+        this.isLoading = isLoading;
     }
 
     public static <T> Resource<T> success(@NonNull T data) {
-        return new Resource<>(Status.SUCCESS, data, null);
+        return new Resource<>(Status.SUCCESS, data, null, false);
     }
 
-    public static <T> Resource<T> error(@NonNull String msg, @Nullable T data) {
-        return new Resource<>(Status.ERROR, data, msg);
+    public static <T> Resource<T> error(@NonNull String msg) {
+        return new Resource<>(Status.ERROR, null, msg, false);
     }
 
-    public static <T> Resource<T> loading(@Nullable T data) {
-        return new Resource<>(Status.LOADING, data, null);
+    public static Resource loading(boolean isLoading) {
+        return new Resource<>(Status.LOADING, null, null, isLoading);
     }
 
     public enum Status {SUCCESS, ERROR, LOADING}
