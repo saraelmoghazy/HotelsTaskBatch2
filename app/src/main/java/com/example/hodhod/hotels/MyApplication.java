@@ -15,21 +15,19 @@ public class MyApplication extends Application {
         instance = this;
     }
 
-    public static MyApplication getInstance(){
+    public static MyApplication getInstance() {
         return instance;
     }
 
-    public static boolean hasNetwork(){
+    public static boolean hasNetwork() {
         return instance.isNetworkConnected();
     }
 
-    private boolean isNetworkConnected(){
+    private boolean isNetworkConnected() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
     }
-
 }

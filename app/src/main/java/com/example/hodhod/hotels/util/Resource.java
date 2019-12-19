@@ -7,18 +7,14 @@ import androidx.annotation.Nullable;
     This is a generic class used to wrap the response.
     It exposes network status using a Resource class that encapsulate both the data and its state
  */
-
 public class Resource<T> {
 
     @NonNull
     public final Status status;
-
     @Nullable
     public final T data;
-
     @Nullable
     public final String message;
-
     public final boolean isLoading;
 
     public Resource(@NonNull Status status, @Nullable T data, @Nullable String message, boolean isLoading) {

@@ -26,38 +26,33 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     // material design
     def material_version = "1.0.0"
     implementation "com.google.android.material:material:$material_version"
-
     // retrofit
     def retrofitVersion = "2.5.0";
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-
     // Rx-Retrofit Call Adapter
     def rxcalladapter_version = '2.5.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rxcalladapter_version"
-
     // ViewModel and LiveData
     def lifecycle_version = "2.1.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-
     // optional - ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
-
     // rxAndroid & rxJava
     def rxAndroid_version = "2.1.1"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
-
     def rxJava_version = "2.2.15"
     implementation "io.reactivex.rxjava2:rxjava:$rxJava_version"
-
     // glide
     def glideVersion = "4.10.0"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
-
-
+    // image pop up
+    implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //fragment
+    implementation 'androidx.fragment:fragment:1.1.0'
 }

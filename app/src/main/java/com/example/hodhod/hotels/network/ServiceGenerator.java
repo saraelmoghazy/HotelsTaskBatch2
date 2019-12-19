@@ -17,9 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     private static long cacheSize = 5 * 1024 * 1024;
-
     private static Cache cache = new Cache(MyApplication.getInstance().getCacheDir(), cacheSize);
-
     private static OkHttpClient.Builder okHttp = new OkHttpClient.Builder()
             .cache(cache)
             .addInterceptor(new Interceptor() {
@@ -35,21 +33,15 @@ public class ServiceGenerator {
                     return chain.proceed(request);
                 }
             });
-
     private static OkHttpClient client = okHttp.build();
-
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .client(client)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create());
-
     private static Retrofit retrofit = builder.build();
-
     private static HotelApi hotelApi = retrofit.create(HotelApi.class);
-
     public static HotelApi getHotelApi() {
         return hotelApi;
     }
-
 }

@@ -24,7 +24,6 @@ public class Hotel {
     }
 
     public List<HotelItem> getHotel() {
-
         return hotel;
     }
 
